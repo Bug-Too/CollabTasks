@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.primary-background {
+    background-color: #a2d2ff;
+}
+div{
+    font-family: Sarabun;
+}
