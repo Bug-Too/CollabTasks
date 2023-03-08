@@ -1,4 +1,4 @@
-<script lang="ts" src="https://unpkg.com/swiper/swiper-bundle.min.js">
+<script lang="ts" src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js">
 	import { register } from 'swiper/element/bundle';
 	import Icon from '@iconify/svelte';
 	import { swipe } from 'svelte-gestures';
@@ -79,9 +79,9 @@
 		<div>Current Date Task</div>
 		<div>Next Date Task</div>
 
-		<swiper-container>
-			<swiper-slide class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="30"
-			loop="true">		<div
+		<swiper-container loop="true">
+			<swiper-slide 
+			>		<div
 				use:swipe={{ timeframe: 300, minSwipeDistance: 50, touchAction: 'pan-y' }}
 				on:swipe={handler}
 				class="max-w-2xl mx-auto bg-white"
@@ -90,8 +90,7 @@
 				<span style="color:red;">{direction}{count}</span><br />
 				You can scroll vertically as normal. It is due to <b>touchAction: 'pan-y'</b>
 			</div></swiper-slide>
-			<swiper-slide class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="30"
-			loop="true">		<div
+			<swiper-slide >		<div
 				use:swipe={{ timeframe: 300, minSwipeDistance: 50, touchAction: 'pan-y' }}
 				on:swipe={handler}
 				class="max-w-2xl mx-auto bg-white"
