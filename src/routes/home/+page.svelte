@@ -1,8 +1,36 @@
 <script lang="ts">
 	import { register } from 'swiper/element/bundle';
 	import Icon from '@iconify/svelte';
-	import { swipe } from 'svelte-gestures';
+	import { onMount } from 'svelte';
+
 	register();
+
+	onMount(() => {
+		const swiperEl = document.querySelector('#swiper1') as any;
+
+		const swiperParams = {
+			speed: 400,
+			spaceBetween: 100
+		};
+
+		if (swiperEl) {
+			console.log('init swiper');
+
+			Object.assign(swiperEl, swiperParams);
+			swiperEl.initialize();
+
+			swiperEl.addEventListener('slidechange', (event:CustomEvent) => {
+			// Returns true when swipe right, false when left.
+			let isRightSwipe = event.detail[0].touches.diff < 0;
+			if (isRightSwipe) {
+				date = nextDate(date);
+			} else {
+				date = beforeDate(date);
+			}
+		});
+		}
+	});
+
 	let direction: string;
 	let count = 0;
 	let date = new Date();
@@ -20,12 +48,7 @@
 	function getDate(date: Date) {
 		return date.getDate();
 	}
-
-	function handler(event: CustomEvent) {
-		direction = event.detail.direction;
-		event.detail.direction === 'left' ? (date = nextDate(date)) : (date = beforeDate(date));
-		count++;
-	}
+	
 	console.log(date.getDate());
 
 	const month = [
@@ -77,11 +100,9 @@
 		<!-- Fix this -->
 		<div class="max-w-2xl mx-auto h-4/6 bg-white rounded-2xl ">
 
-			<swiper-container loop="true">
+			<swiper-container loop="true" id="swiper1">
 				<swiper-slide>
 					<div
-						use:swipe={{ timeframe: 1000000000, minSwipeDistance: 30, touchAction: 'pan-y' }}
-						on:swipe={handler}
 						class=""
 					>
 					<div class="px-8 py-8 flex overflow-x-auto">
@@ -106,8 +127,6 @@
 				</swiper-slide>
 				<swiper-slide>
 					<div
-						use:swipe={{ timeframe: 1000000000, minSwipeDistance: 30, touchAction: 'pan-y' }}
-						on:swipe={handler}
 						class="h-40 px-8 py-8"
 					>
 						<span style="color:red;">{direction}{count}</span>
