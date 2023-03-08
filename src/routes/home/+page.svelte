@@ -1,4 +1,4 @@
-<script lang="ts" src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js">
+<script lang="ts">
 	import { register } from 'swiper/element/bundle';
 	import Icon from '@iconify/svelte';
 	import { swipe } from 'svelte-gestures';
@@ -28,7 +28,6 @@
 	}
 	console.log(date.getDate());
 
-
 	const month = [
 		'January',
 		'February',
@@ -41,66 +40,65 @@
 		'September',
 		'October',
 		'November',
-		'December',
+		'December'
 	];
 	console.log(month[date.getMonth()]);
 </script>
 
-
-
-
-<div class="primary-background h-screen pt-16">
-	<div class="px-4">
+<div class="primary-background ">
+	<div class="px-4 h-screen pt-8">
 		<div class="flex justify-center">
 			<div class="py-5 bg-white rounded-full px-10">
-				<h1 class="text-4xl font-bold"><span class="accent-color">{date.getDate()}</span> {month[date.getMonth()]} {date.getFullYear()}</h1>
+				<h1 class="text-3xl font-bold">
+					<span class="accent-color">{date.getDate()}</span>
+					{month[date.getMonth()]}
+					{date.getFullYear()}
+				</h1>
 			</div>
 		</div>
 
-		<div class="max-w-2xl mx-auto pt-8">
+		<div class="max-w-2xl mx-auto py-8">
 			<div class="flex justify-between">
-				<div class="w-24 h-24 rounded-full bg-white flex justify-center ">
-					<Icon icon="mdi:user" color="#FFAFCC" class="w-16 h-16 justify-self-center self-center" />
+				<div class="w-16 h-16 rounded-full bg-white flex justify-center ">
+					<Icon icon="mdi:user" color="#FFAFCC" class="w-12 h-12	 justify-self-center self-center" />
 				</div>
 				<div class="flex items-center">
 					<span class="text-xl font-bold pr-2"> Board_Name </span>
-					<div class="w-24 h-24 rounded-full bg-white flex justify-center">
+					<div class="w-16 h-16 rounded-full bg-white flex justify-center">
 						<Icon
 							icon="fluent:board-20-filled"
 							color="#FFAFCC"
-							class="w-16 h-16 justify-self-center self-center"
+							class="w-12 h-12 justify-self-center self-center"
 						/>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Fix this -->
-		<div>Before Date Task</div>
-		<div>Current Date Task</div>
-		<div>Next Date Task</div>
-
-		<swiper-container loop="true">
-			<swiper-slide 
-			>		<div
-				use:swipe={{ timeframe: 300, minSwipeDistance: 50, touchAction: 'pan-y' }}
-				on:swipe={handler}
-				class="max-w-2xl mx-auto bg-white"
-			>
-				This one <b>swipes only in horizontal directions</b>:
-				<span style="color:red;">{direction}{count}</span><br />
-				You can scroll vertically as normal. It is due to <b>touchAction: 'pan-y'</b>
-			</div></swiper-slide>
-			<swiper-slide >		<div
-				use:swipe={{ timeframe: 300, minSwipeDistance: 50, touchAction: 'pan-y' }}
-				on:swipe={handler}
-				class="max-w-2xl mx-auto bg-white"
-			>
-				This one <b>swipes only in horizontal directions</b>:
-				<span style="color:red;">{direction}{count}</span><br />
-				You can scroll vertically as normal. It is due to <b>touchAction: 'pan-y'</b>
-			</div></swiper-slide>
-		</swiper-container>
-		  
+		<div class="max-w-2xl mx-auto h-4/6 bg-white rounded-2xl px-8 py-8">
+			<swiper-container loop="true">
+				<swiper-slide>
+					<div
+						use:swipe={{ timeframe: 1000000000, minSwipeDistance: 30, touchAction: 'pan-y' }}
+						on:swipe={handler}
+						class="h-40"
+					>
+						<span style="color:red;">{direction}{count}</span>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur voluptate eveniet exercitationem cumque necessitatibus velit adipisci corrupti earum, soluta sint aut, temporibus dolorem aliquid nisi, optio quisquam officiis enim dolores.
+					</div>
+				</swiper-slide>
+				<swiper-slide>
+					<div
+						use:swipe={{ timeframe: 1000000000, minSwipeDistance: 30, touchAction: 'pan-y' }}
+						on:swipe={handler}
+						class="h-40"
+					>
+					<span style="color:red;">{direction}{count}</span>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur voluptate eveniet exercitationem cumque necessitatibus velit adipisci corrupti earum, soluta sint aut, temporibus dolorem aliquid nisi, optio quisquam officiis enim dolores.
+					</div>
+				</swiper-slide>
+			</swiper-container>
+		</div>
 	</div>
 </div>
 
