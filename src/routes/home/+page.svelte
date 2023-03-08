@@ -1,6 +1,8 @@
-<script lang="ts">
+<script lang="ts" src="https://unpkg.com/swiper/swiper-bundle.min.js">
+	import { register } from 'swiper/element/bundle';
 	import Icon from '@iconify/svelte';
 	import { swipe } from 'svelte-gestures';
+	register();
 	let direction: string;
 	let count = 0;
 	let date = new Date();
@@ -44,6 +46,9 @@
 	console.log(month[date.getMonth()]);
 </script>
 
+
+
+
 <div class="primary-background h-screen pt-16">
 	<div class="px-4">
 		<div class="flex justify-center">
@@ -73,15 +78,30 @@
 		<div>Before Date Task</div>
 		<div>Current Date Task</div>
 		<div>Next Date Task</div>
-		<div
-			use:swipe={{ timeframe: 300, minSwipeDistance: 50, touchAction: 'pan-y' }}
-			on:swipe={handler}
-			class="max-w-2xl mx-auto bg-white"
-		>
-			This one <b>swipes only in horizontal directions</b>:
-			<span style="color:red;">{direction}{count}</span><br />
-			You can scroll vertically as normal. It is due to <b>touchAction: 'pan-y'</b>
-		</div>
+
+		<swiper-container>
+			<swiper-slide class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="30"
+			loop="true">		<div
+				use:swipe={{ timeframe: 300, minSwipeDistance: 50, touchAction: 'pan-y' }}
+				on:swipe={handler}
+				class="max-w-2xl mx-auto bg-white"
+			>
+				This one <b>swipes only in horizontal directions</b>:
+				<span style="color:red;">{direction}{count}</span><br />
+				You can scroll vertically as normal. It is due to <b>touchAction: 'pan-y'</b>
+			</div></swiper-slide>
+			<swiper-slide class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="30"
+			loop="true">		<div
+				use:swipe={{ timeframe: 300, minSwipeDistance: 50, touchAction: 'pan-y' }}
+				on:swipe={handler}
+				class="max-w-2xl mx-auto bg-white"
+			>
+				This one <b>swipes only in horizontal directions</b>:
+				<span style="color:red;">{direction}{count}</span><br />
+				You can scroll vertically as normal. It is due to <b>touchAction: 'pan-y'</b>
+			</div></swiper-slide>
+		</swiper-container>
+		  
 	</div>
 </div>
 
