@@ -75,26 +75,42 @@
 			</div>
 		</div>
 		<!-- Fix this -->
-		<div class="max-w-2xl mx-auto h-4/6 bg-white rounded-2xl px-8 py-8">
+		<div class="max-w-2xl mx-auto h-4/6 bg-white rounded-2xl ">
+
 			<swiper-container loop="true">
 				<swiper-slide>
 					<div
 						use:swipe={{ timeframe: 1000000000, minSwipeDistance: 30, touchAction: 'pan-y' }}
 						on:swipe={handler}
-						class="h-40"
+						class=""
 					>
-						<span style="color:red;">{direction}{count}</span>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur voluptate eveniet exercitationem cumque necessitatibus velit adipisci corrupti earum, soluta sint aut, temporibus dolorem aliquid nisi, optio quisquam officiis enim dolores.
+					<div class="px-8 py-8 flex overflow-x-auto">
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+						<div class="px-10 py-10 rounded-full bg-black"></div>
+					</div>	
+					
+						
+						<div class="border-line " />
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, illo consequuntur corporis nobis adipisci nisi eius odio, obcaecati consectetur earum cumque modi doloremque vero alias, neque nemo repellat corrupti est?
 					</div>
+					
 				</swiper-slide>
 				<swiper-slide>
 					<div
 						use:swipe={{ timeframe: 1000000000, minSwipeDistance: 30, touchAction: 'pan-y' }}
 						on:swipe={handler}
-						class="h-40"
+						class="h-40 px-8 py-8"
 					>
-					<span style="color:red;">{direction}{count}</span>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur voluptate eveniet exercitationem cumque necessitatibus velit adipisci corrupti earum, soluta sint aut, temporibus dolorem aliquid nisi, optio quisquam officiis enim dolores.
+						<span style="color:red;">{direction}{count}</span>
 					</div>
 				</swiper-slide>
 			</swiper-container>
@@ -105,5 +121,9 @@
 <style>
 	.accent-color {
 		color: #f72585;
+	}
+	.border-line {
+		border: 4px dashed #a2d2ff;
+		
 	}
 </style>
