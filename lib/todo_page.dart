@@ -208,9 +208,17 @@ class _TodoPageState extends State<TodoPage> {
                       child: Text('Add a task'),
                     )),
               ),
-            ))
+            )),
+            
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.add),
       ),
     );
   }
