@@ -111,7 +111,7 @@ class _TodoPageState extends State<TodoPage> {
         },
         child: Container(
             margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(50),
@@ -163,7 +163,7 @@ class _TodoPageState extends State<TodoPage> {
               iconColor: Color.fromARGB(255, 255, 175, 204),
               onPressed: () {
                 //  TODO: Add login page here
-                print('Button pressed');
+                print('User button pressed');
               }),
           Row(
             children: [
@@ -175,7 +175,7 @@ class _TodoPageState extends State<TodoPage> {
                   iconColor: Color.fromARGB(255, 255, 175, 204),
                   onPressed: () {
                     // TODO: Add board page here
-                    print('Button pressed');
+                    print('Board button pressed');
                   })
             ],
           ),
@@ -194,15 +194,15 @@ class _TodoPageState extends State<TodoPage> {
               margin: const EdgeInsets.all(20),
               child: DottedBorder(
                 color: Colors.white,
-                strokeWidth: 3,
+                strokeWidth: 4,
                 borderType: BorderType.RRect,
-                radius: Radius.circular(12),
+                radius: Radius.circular(24),
                 dashPattern: [10, 10],
                 child: Container(
                     margin: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(24),
                     ),
                     child: const Center(
                       child: Text('Add a task'),
