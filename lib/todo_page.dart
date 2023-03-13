@@ -44,8 +44,45 @@ class CircleIconButton extends StatelessWidget {
   }
 }
 
+// Source: https://stackoverflow.com/questions/54019785/how-to-add-line-dash-in-flutter
+class MySeparator extends StatelessWidget {
+  const MySeparator({Key? key, this.height = 1, this.color = Colors.black})
+      : super(key: key);
+  final double height;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final boxWidth = constraints.constrainWidth();
+        const dashWidth = 10.0;
+        final dashHeight = height;
+        final dashCount = (boxWidth / (2 * dashWidth)).floor();
+        return Flex(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          direction: Axis.horizontal,
+          children: List.generate(dashCount, (_) {
+            return SizedBox(
+              width: dashWidth,
+              height: dashHeight,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: color),
+              ),
+            );
+          }),
+        );
+      },
+    );
+  }
+}
+
 class _TodoPageState extends State<TodoPage> {
   var date = DateTime.now();
+  final primaryColor =  const Color.fromARGB(255, 162, 210, 255);
+  final secondaryColor = const Color.fromARGB(255, 255, 175, 204);
+  final successColor = const Color.fromARGB(255,202,255,191);
+
 
   Future<DateTime?> _selectDate(BuildContext context) async {
     DateTime? selectedDate = date;
@@ -160,7 +197,7 @@ class _TodoPageState extends State<TodoPage> {
               iconData: Icons.person,
               size: 60,
               color: Colors.white,
-              iconColor: Color.fromARGB(255, 255, 175, 204),
+              iconColor: secondaryColor,
               onPressed: () {
                 //  TODO: Add login page here
                 print('User button pressed');
@@ -172,7 +209,7 @@ class _TodoPageState extends State<TodoPage> {
                   iconData: Icons.bookmark,
                   size: 60,
                   color: Colors.white,
-                  iconColor: Color.fromARGB(255, 255, 175, 204),
+                  iconColor: secondaryColor,
                   onPressed: () {
                     // TODO: Add board page here
                     print('Board button pressed');
@@ -181,6 +218,32 @@ class _TodoPageState extends State<TodoPage> {
           ),
         ],
       );
+    }
+
+    Widget taskIcon(bool isDone) {
+      var widgetIsDone = isDone;
+      return Column(children: [
+        Container(
+          width: 50,
+          height: 50,
+          decoration: BoxDecoration(
+            color: widgetIsDone?successColor: secondaryColor ,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child:  Icon(widgetIsDone? Icons.done: Icons.circle, color: widgetIsDone? Colors.black: Colors.white, ),
+        ),
+        widgetIsDone ? Text('Task_Name' , style: TextStyle(decoration: TextDecoration.lineThrough),) : Text('Task_Name')
+      ]);
+    }
+
+    Widget generalTaskList() {
+      return (Container(
+        height: 50,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: List.generate(10, (index) => taskIcon(index%2==0?false:true)),
+        ),
+      ));
     }
 
     Widget taskBox() {
@@ -199,8 +262,17 @@ class _TodoPageState extends State<TodoPage> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(24),
               ),
-              child: const Center(
-                child: Text('Add a task'),
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    child: SizedBox(
+                      height: 66,
+                      child: generalTaskList(),
+                    ),
+                  ),
+                  MySeparator(color: primaryColor, height: 4,)
+                ],
               )),
         ),
       ));
@@ -209,11 +281,7 @@ class _TodoPageState extends State<TodoPage> {
     return Scaffold(
       body: Center(
         child: Column(
-          children: [
-            dateBar(),
-            topMenu(),
-            taskBox()
-          ],
+          children: [dateBar(), topMenu(), taskBox()],
         ),
       ),
       floatingActionButton: FloatingActionButton(
