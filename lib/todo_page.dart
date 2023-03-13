@@ -183,33 +183,36 @@ class _TodoPageState extends State<TodoPage> {
       );
     }
 
+    Widget taskBox() {
+      return Expanded(
+          child: Container(
+        margin: const EdgeInsets.all(20),
+        child: DottedBorder(
+          color: Colors.white,
+          strokeWidth: 4,
+          borderType: BorderType.RRect,
+          radius: Radius.circular(24),
+          dashPattern: [16, 10],
+          child: Container(
+              margin: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: const Center(
+                child: Text('Add a task'),
+              )),
+        ),
+      ));
+    }
+
     return Scaffold(
       body: Center(
         child: Column(
           children: [
             dateBar(),
             topMenu(),
-            Expanded(
-                child: Container(
-              margin: const EdgeInsets.all(20),
-              child: DottedBorder(
-                color: Colors.white,
-                strokeWidth: 4,
-                borderType: BorderType.RRect,
-                radius: Radius.circular(24),
-                dashPattern: [10, 10],
-                child: Container(
-                    margin: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    child: const Center(
-                      child: Text('Add a task'),
-                    )),
-              ),
-            )),
-            
+            taskBox()
           ],
         ),
       ),
