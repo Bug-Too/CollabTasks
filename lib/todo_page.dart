@@ -151,6 +151,37 @@ class _TodoPageState extends State<TodoPage> {
       );
     }
 
+    Widget topMenu() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          CircleIconButton(
+              iconData: Icons.person,
+              size: 50,
+              color: Colors.white,
+              iconColor: Color.fromARGB(255, 255, 175, 204),
+              onPressed: () {
+                //  TODO: Add login page here
+                print('Button pressed');
+              }),
+          Row(
+            children: [
+              Text('Board_Name '),
+              CircleIconButton(
+                  iconData: Icons.bookmark,
+                  size: 50,
+                  color: Colors.white,
+                  iconColor: Color.fromARGB(255, 255, 175, 204),
+                  onPressed: () {
+                    // TODO: Add board page here
+                    print('Button pressed');
+                  })
+            ],
+          ),
+        ],
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todo Page'),
@@ -159,34 +190,7 @@ class _TodoPageState extends State<TodoPage> {
         child: Column(
           children: [
             dateBar(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CircleIconButton(
-                    iconData: Icons.person,
-                    size: 50,
-                    color: Colors.white,
-                    iconColor: Color.fromARGB(255, 255, 175, 204),
-                    onPressed: () {
-                      //  TODO: Add login page here
-                      print('Button pressed');
-                    }),
-                Row(
-                  children:[
-                    Text('Board_Name '),
-                    CircleIconButton(
-                        iconData: Icons.bookmark,
-                        size: 50,
-                        color: Colors.white,
-                        iconColor: Color.fromARGB(255, 255, 175, 204),
-                        onPressed: () {
-                          // TODO: Add board page here
-                          print('Button pressed');
-                        })
-                  ],
-                ),
-              ],
-            ),
+            topMenu(),
           ],
         ),
       ),
