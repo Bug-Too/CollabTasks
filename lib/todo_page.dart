@@ -52,7 +52,7 @@ class _TodoPageState extends State<TodoPage> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate!,
-      firstDate: DateTime(2015, 8),
+      firstDate: DateTime(1900),
       lastDate: DateTime(2101),
     );
 
@@ -84,7 +84,7 @@ class _TodoPageState extends State<TodoPage> {
       ];
       return [
         date.day.toString(),
-        ' ${months[date.month]} ${date.year.toString()}'
+        ' ${months[date.month - 1]} ${date.year.toString()}'
       ];
     }
 
@@ -127,7 +127,7 @@ class _TodoPageState extends State<TodoPage> {
                 RichText(
                   text: TextSpan(
                     text: '',
-                    style: const TextStyle(color: Colors.black, fontSize: 24),
+                    style: const TextStyle(color: Colors.black, fontSize: 26),
                     children: <TextSpan>[
                       TextSpan(
                           text: getCurrentDate()[0],
@@ -157,7 +157,7 @@ class _TodoPageState extends State<TodoPage> {
         children: [
           CircleIconButton(
               iconData: Icons.person,
-              size: 50,
+              size: 60,
               color: Colors.white,
               iconColor: Color.fromARGB(255, 255, 175, 204),
               onPressed: () {
@@ -169,7 +169,7 @@ class _TodoPageState extends State<TodoPage> {
               Text('Board_Name '),
               CircleIconButton(
                   iconData: Icons.bookmark,
-                  size: 50,
+                  size: 60,
                   color: Colors.white,
                   iconColor: Color.fromARGB(255, 255, 175, 204),
                   onPressed: () {
@@ -183,14 +183,18 @@ class _TodoPageState extends State<TodoPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Todo Page'),
-      ),
       body: Center(
         child: Column(
           children: [
             dateBar(),
             topMenu(),
+            Expanded(
+                child: Container(
+              margin: EdgeInsets.all(20),
+              
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
+            ))
           ],
         ),
       ),
