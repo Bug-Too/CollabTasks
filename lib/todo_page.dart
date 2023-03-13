@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dotted_border/dotted_border.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
@@ -190,10 +191,23 @@ class _TodoPageState extends State<TodoPage> {
             topMenu(),
             Expanded(
                 child: Container(
-              margin: EdgeInsets.all(20),
-              
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
+              margin: const EdgeInsets.all(20),
+              child: DottedBorder(
+                color: Colors.white,
+                strokeWidth: 3,
+                borderType: BorderType.RRect,
+                radius: Radius.circular(12),
+                dashPattern: [10, 10],
+                child: Container(
+                    margin: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const Center(
+                      child: Text('Add a task'),
+                    )),
+              ),
             ))
           ],
         ),

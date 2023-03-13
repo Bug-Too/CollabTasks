@@ -15,7 +15,8 @@ class MainApp extends StatelessWidget {
         theme: ThemeData(
             scaffoldBackgroundColor: const Color.fromARGB(255, 162, 210, 255)),
         home: const Scaffold(
-          body: TodoPage(),
+          
+          body: SafeArea(child:TodoPage()) ,
         ));
   }
 }
