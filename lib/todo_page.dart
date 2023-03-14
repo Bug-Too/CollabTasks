@@ -89,7 +89,7 @@ class _TodoPageState extends State<TodoPage> {
 
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate!,
+      initialDate: selectedDate,
       firstDate: DateTime(1900),
       lastDate: DateTime(2101),
     );
