@@ -1,6 +1,7 @@
+import 'package:collabtask/task_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
-
+import 'style.dart';
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
 
@@ -15,7 +16,7 @@ class CircleIconButton extends StatelessWidget {
   final Color iconColor;
   final VoidCallback onPressed;
 
-  CircleIconButton({
+  const CircleIconButton({super.key, 
     required this.iconData,
     required this.size,
     required this.color,
@@ -32,7 +33,7 @@ class CircleIconButton extends StatelessWidget {
         onPressed: onPressed,
         style: TextButton.styleFrom(
           backgroundColor: color,
-          shape: CircleBorder(),
+          shape: const CircleBorder(),
         ),
         child: Icon(
           iconData,
@@ -79,11 +80,27 @@ class MySeparator extends StatelessWidget {
 
 class _TodoPageState extends State<TodoPage> {
   var date = DateTime.now();
-  final primaryColor =  const Color.fromARGB(255, 162, 210, 255);
-  final secondaryColor = const Color.fromARGB(255, 255, 175, 204);
-  final successColor = const Color.fromARGB(255,202,255,191);
+  List<TaskCheckBox> taskList =[];
 
-
+  @override
+  void initState() {
+    super.initState();
+    taskList.add(TaskCheckBox(key: Key('0'), callback: _onChangedTask, isDone: false, taskName: ' My Task a ',));
+    taskList.add(TaskCheckBox(key: Key('1'), callback: _onChangedTask, isDone: false, taskName: ' My Task b ',));
+    taskList.add(TaskCheckBox(key: Key('2'), callback: _onChangedTask, isDone: false, taskName: ' My Task c ',)); 
+  }
+  void _onChangedTask(TaskCheckBox changed, bool isDone){
+    setState(() {
+      taskList.removeWhere((e) => e.key == changed.key);
+      TaskCheckBox newStateTask = TaskCheckBox(key: changed.key, callback: _onChangedTask, isDone: isDone, taskName: changed.taskName,);
+      if (isDone){
+        taskList.add(newStateTask);
+      }else{
+        taskList.insert(0, newStateTask);
+      }
+      taskList = [...taskList];
+    });
+  }
   Future<DateTime?> _selectDate(BuildContext context) async {
     DateTime? selectedDate = date;
 
@@ -220,28 +237,14 @@ class _TodoPageState extends State<TodoPage> {
       );
     }
 
-    Widget taskIcon(bool isDone) {
-      var widgetIsDone = isDone;
-      return Column(children: [
-        Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-            color: widgetIsDone?successColor: secondaryColor ,
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child:  Icon(widgetIsDone? Icons.done: Icons.circle, color: widgetIsDone? Colors.black: Colors.white, ),
-        ),
-        widgetIsDone ? Text('Task_Name' , style: TextStyle(decoration: TextDecoration.lineThrough),) : Text('Task_Name')
-      ]);
-    }
+
 
     Widget generalTaskList() {
       return (Container(
         height: 50,
         child: ListView(
           scrollDirection: Axis.horizontal,
-          children: List.generate(10, (index) => taskIcon(index%2==0?false:true)),
+          children: taskList,
         ),
       ));
     }
