@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'style.dart';
 import "package:collabtask/schedule_task.dart";
-
+import 'all_board_page.dart';
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
 
@@ -256,6 +256,10 @@ class _TodoPageState extends State<TodoPage> {
                   onPressed: () {
                     // TODO: Add board page here
                     print('Board button pressed');
+                    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => AllBoardPage()),
+  );
                   })
             ],
           ),
