@@ -274,7 +274,7 @@ class _TodoPageState extends State<TodoPage> {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return WidgetDialog( title: 'Add Task',);
+      return WidgetDialog( title: 'Add Task', imageURLlist: [demoUserImage1],);
     },
   );
 }

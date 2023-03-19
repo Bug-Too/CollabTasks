@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'style.dart';
+import 'profiles_box.dart';
 
 class ScheduleTask extends StatefulWidget {
   final bool isDone;
@@ -22,17 +23,6 @@ class _ScheduleTaskState extends State<ScheduleTask> {
     _value = widget.isDone;
   }
 
-  Widget userImage(String imgURL){
-    return ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      child: Image.network(
-                        imgURL,
-                        width: 30,
-                        height: 30,
-                        fit: BoxFit.cover,
-                      ),
-                    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +63,7 @@ class _ScheduleTaskState extends State<ScheduleTask> {
                                     decoration: TextDecoration.lineThrough),
                               )
                             : Text(widget.taskName),Text('time: 10:00 - 12:00'),
-                         Row(children: List.generate(widget.imageURLlist.length , (index) => userImage(widget.imageURLlist[index])),)
+                         profileBox(widget.imageURLlist),
                       ],
                     ))
                     ,Icon(

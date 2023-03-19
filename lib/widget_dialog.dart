@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'style.dart';
+import 'profiles_box.dart';
 
 class WidgetDialog extends StatefulWidget{
   final String title;
-  
+  final List<String> imageURLlist;
 
-  const WidgetDialog({super.key, required this.title,});
+  const WidgetDialog({super.key, required this.title, this.imageURLlist = const []});
 
   @override
   State<StatefulWidget> createState() => _WidgetDialogState();
@@ -27,9 +28,11 @@ class _WidgetDialogState extends State<WidgetDialog>{
           children: [
             SizedBox(height: 20),
             Text("Add New Task", style: TextStyle(fontSize: 20),),
-            SizedBox(height: 10),
+Container(margin: EdgeInsets.fromLTRB(20, 10, 20, 0), child: profileBox(widget.imageURLlist),)
+            ,
+            
             Container(
-              margin: EdgeInsets.all(16),
+              margin: EdgeInsets.fromLTRB(20, 5, 20, 10),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
