@@ -1,7 +1,10 @@
 import 'package:collabtask/task_check_box.dart';
+import 'package:collabtask/widget_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'style.dart';
+import "package:collabtask/schedule_task.dart";
+
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
 
@@ -16,7 +19,8 @@ class CircleIconButton extends StatelessWidget {
   final Color iconColor;
   final VoidCallback onPressed;
 
-  const CircleIconButton({super.key, 
+  const CircleIconButton({
+    super.key,
     required this.iconData,
     required this.size,
     required this.color,
@@ -80,27 +84,49 @@ class MySeparator extends StatelessWidget {
 
 class _TodoPageState extends State<TodoPage> {
   var date = DateTime.now();
-  List<TaskCheckBox> taskList =[];
+  List<TaskCheckBox> taskList = [];
 
   @override
   void initState() {
     super.initState();
-    taskList.add(TaskCheckBox(key: Key('0'), callback: _onChangedTask, isDone: false, taskName: ' My Task a ',));
-    taskList.add(TaskCheckBox(key: Key('1'), callback: _onChangedTask, isDone: false, taskName: ' My Task b ',));
-    taskList.add(TaskCheckBox(key: Key('2'), callback: _onChangedTask, isDone: false, taskName: ' My Task c ',)); 
+    taskList.add(TaskCheckBox(
+      key: Key('0'),
+      callback: _onChangedTask,
+      isDone: false,
+      taskName: ' My Task a ',
+    ));
+    taskList.add(TaskCheckBox(
+      key: Key('1'),
+      callback: _onChangedTask,
+      isDone: false,
+      taskName: ' My Task b ',
+    ));
+    taskList.add(TaskCheckBox(
+      key: Key('2'),
+      callback: _onChangedTask,
+      isDone: false,
+      taskName: ' My Task c ',
+    ));
   }
-  void _onChangedTask(TaskCheckBox changed, bool isDone){
+
+  void _onChangedTask(TaskCheckBox changed, bool isDone) {
     setState(() {
       taskList.removeWhere((e) => e.key == changed.key);
-      TaskCheckBox newStateTask = TaskCheckBox(key: changed.key, callback: _onChangedTask, isDone: isDone, taskName: changed.taskName,);
-      if (isDone){
+      TaskCheckBox newStateTask = TaskCheckBox(
+        key: changed.key,
+        callback: _onChangedTask,
+        isDone: isDone,
+        taskName: changed.taskName,
+      );
+      if (isDone) {
         taskList.add(newStateTask);
-      }else{
+      } else {
         taskList.insert(0, newStateTask);
       }
       taskList = [...taskList];
     });
   }
+
   Future<DateTime?> _selectDate(BuildContext context) async {
     DateTime? selectedDate = date;
 
@@ -237,7 +263,17 @@ class _TodoPageState extends State<TodoPage> {
       );
     }
 
+   void addNewTask() async {
+  TimeOfDay selectedStartTime = TimeOfDay.now();
+  TimeOfDay selectedEndTime = TimeOfDay.now();
 
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return WidgetDialog( title: 'Add Task',);
+    },
+  );
+}
 
     Widget generalTaskList() {
       return (Container(
@@ -274,7 +310,15 @@ class _TodoPageState extends State<TodoPage> {
                       child: generalTaskList(),
                     ),
                   ),
-                  MySeparator(color: primaryColor, height: 4,)
+                  MySeparator(
+                    color: primaryColor,
+                    height: 4,
+                  ),
+                  ScheduleTask(
+                      isDone: false,
+                      taskName: "taskName ",
+                      imageURLlist: [demoUserImage1, demoUserImage1],
+                      timeInterval: [DateTime.now(), DateTime.now()])
                 ],
               )),
         ),
@@ -290,6 +334,7 @@ class _TodoPageState extends State<TodoPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add your onPressed code here!
+          addNewTask();
         },
         backgroundColor: Colors.blue,
         child: const Icon(Icons.add),
