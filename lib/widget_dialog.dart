@@ -5,9 +5,19 @@ import 'profiles_box.dart';
 class WidgetDialog extends StatefulWidget {
   final String title;
   final List<String> imageURLlist;
+  String taskName;
+  bool isAddTime;
+  TimeOfDay selectedStartTime;
+  TimeOfDay selectedEndTime;
 
-  const WidgetDialog(
-      {super.key, required this.title, this.imageURLlist = const []});
+  WidgetDialog(
+      {super.key,
+      required this.title,
+      this.imageURLlist = const [],
+      this.selectedStartTime = const TimeOfDay(hour: 0, minute: 0),
+      this.selectedEndTime = const TimeOfDay(hour: 0, minute: 0),
+      this.isAddTime = false,
+      required this.taskName});
 
   @override
   State<StatefulWidget> createState() => _WidgetDialogState();
@@ -29,21 +39,22 @@ class _WidgetDialogState extends State<WidgetDialog> {
         children: [
           SizedBox(height: 20),
           Text(
-            "Add New Task",
+            widget.title,
             style: TextStyle(fontSize: 20),
           ),
-          Container(
-            margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
-            child: profileBox(widget.imageURLlist),
-          ),
+          // Container(
+          //   margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+          //   child: profileBox(widget.imageURLlist),
+          // ),
           Container(
             margin: EdgeInsets.fromLTRB(20, 5, 20, 10),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: TextField(
+            child: TextFormField(
               autofocus: true,
+              initialValue: widget.taskName,
               decoration: InputDecoration(
                 hintText: 'Task Name',
                 contentPadding: EdgeInsets.symmetric(horizontal: 16),

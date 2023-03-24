@@ -5,8 +5,9 @@ class TaskCheckBox extends StatefulWidget {
   final bool isDone;
   final taskName;
   final callback;
+  final onLongPress;
 
-  const TaskCheckBox({super.key, required this.isDone, required this.callback, required this.taskName});
+  const TaskCheckBox({super.key, required this.isDone, required this.callback, required this.taskName, required, this.onLongPress});
 
   @override
   State<StatefulWidget> createState() => _TaskCheckBoxState();
@@ -33,9 +34,7 @@ class _TaskCheckBoxState extends State<TaskCheckBox> {
         },
         onLongPress: () {
           //TODO: Show popup here
-          setState(() {
-            _value = !_value;
-          });
+          widget.onLongPress(widget.taskName);
         },
         child: Container(
           width: 50,

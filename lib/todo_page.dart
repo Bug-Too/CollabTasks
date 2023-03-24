@@ -5,6 +5,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'style.dart';
 import "package:collabtask/schedule_task.dart";
 import 'all_board_page.dart';
+
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
 
@@ -86,29 +87,6 @@ class _TodoPageState extends State<TodoPage> {
   var date = DateTime.now();
   List<TaskCheckBox> taskList = [];
 
-  @override
-  void initState() {
-    super.initState();
-    taskList.add(TaskCheckBox(
-      key: Key('0'),
-      callback: _onChangedTask,
-      isDone: false,
-      taskName: ' My Task a ',
-    ));
-    taskList.add(TaskCheckBox(
-      key: Key('1'),
-      callback: _onChangedTask,
-      isDone: false,
-      taskName: ' My Task b ',
-    ));
-    taskList.add(TaskCheckBox(
-      key: Key('2'),
-      callback: _onChangedTask,
-      isDone: false,
-      taskName: ' My Task c ',
-    ));
-  }
-
   void _onChangedTask(TaskCheckBox changed, bool isDone) {
     setState(() {
       taskList.removeWhere((e) => e.key == changed.key);
@@ -125,6 +103,36 @@ class _TodoPageState extends State<TodoPage> {
       }
       taskList = [...taskList];
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    List task_names = ['My Task a', 'My Task b', 'My Task c'];
+    void _onLongPressTask(String task_name) async {
+      TimeOfDay selectedStartTime = TimeOfDay.now();
+      TimeOfDay selectedEndTime = TimeOfDay.now();
+
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return WidgetDialog(
+              title: 'Edit Task',
+              imageURLlist: [demoUserImage1],
+              taskName: task_name,
+            );
+          });
+    }
+
+    taskList = List.generate(
+        task_names.length,
+        (index) => TaskCheckBox(
+              key: Key(index.toString()),
+              callback: _onChangedTask,
+              onLongPress: _onLongPressTask,
+              isDone: false,
+              taskName: task_names[index],
+            ));
   }
 
   Future<DateTime?> _selectDate(BuildContext context) async {
@@ -257,9 +265,9 @@ class _TodoPageState extends State<TodoPage> {
                     // TODO: Add board page here
                     print('Board button pressed');
                     Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => AllBoardPage()),
-  );
+                      context,
+                      MaterialPageRoute(builder: (context) => AllBoardPage()),
+                    );
                   })
             ],
           ),
@@ -267,17 +275,37 @@ class _TodoPageState extends State<TodoPage> {
       );
     }
 
-   void addNewTask() async {
-  TimeOfDay selectedStartTime = TimeOfDay.now();
-  TimeOfDay selectedEndTime = TimeOfDay.now();
+    void addNewTask() async {
+      TimeOfDay selectedStartTime = TimeOfDay.now();
+      TimeOfDay selectedEndTime = TimeOfDay.now();
 
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return WidgetDialog( title: 'Add Task', imageURLlist: [demoUserImage1],);
-    },
-  );
-}
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return WidgetDialog(
+            title: 'Add New Task',
+            imageURLlist: [demoUserImage1],
+            taskName: "",
+          );
+        },
+      );
+    }
+
+    void editTask() async {
+      TimeOfDay selectedStartTime = TimeOfDay.now();
+      TimeOfDay selectedEndTime = TimeOfDay.now();
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return WidgetDialog(
+            title: 'Edit Task',
+            imageURLlist: [demoUserImage1],
+            taskName: "",
+          );
+        },
+      );
+    }
 
     Widget generalTaskList() {
       return (Container(
