@@ -42,6 +42,7 @@ class _WidgetDialogState extends State<WidgetDialog> {
             widget.title,
             style: TextStyle(fontSize: 20),
           ),
+          SizedBox(height: 10),
           // Container(
           //   margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
           //   child: profileBox(widget.imageURLlist),

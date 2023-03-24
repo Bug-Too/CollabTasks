@@ -62,8 +62,11 @@ class _ScheduleTaskState extends State<ScheduleTask> {
                                 style: TextStyle(
                                     decoration: TextDecoration.lineThrough),
                               )
-                            : Text(widget.taskName),Text('time: 10:00 - 12:00'),
-                         profileBox(widget.imageURLlist),
+                            : Text(widget.taskName,style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16
+                                    )),Text('Time: 10:00AM - 12:00PM'),
+                        //  profileBox(widget.imageURLlist),
                       ],
                     ))
                     ,Icon(
