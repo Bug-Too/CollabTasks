@@ -16,12 +16,6 @@ class BoardCard extends StatefulWidget {
 
 class _BoardCardState extends State<BoardCard> {
   bool isEdit = true;
-  TextEditingController _controller = new TextEditingController();
-  @override
-  void initState() {
-    super.initState();
-    _controller.text = widget.boardName;
-  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -83,8 +77,8 @@ class _BoardCardState extends State<BoardCard> {
                         Column(
                           children: [
                             profileBox(widget.imageURLlist),
-                            TextField(
-                              controller:  _controller,
+                            TextFormField(
+                              initialValue: widget.boardName,
                               decoration: InputDecoration(
                                 hintText: 'Board Name',
                                 label: Text('Board Name'),
@@ -92,8 +86,13 @@ class _BoardCardState extends State<BoardCard> {
                             ),
                             SizedBox(height: 20),
                             Row(children:[Text("Share With" ,textAlign: TextAlign.left,),]),
-                            userImage('https://picsum.photos/250?image=9', 60),
-                            
+                            ...List.generate(widget.emailURLlist.length, (index) => TextFormField(
+                              initialValue: widget.emailURLlist[index],
+                              decoration: InputDecoration(
+                                hintText: 'Email',
+                                label: Text('Email'),
+                              ),
+                            )),
                             
                           ],
                          
