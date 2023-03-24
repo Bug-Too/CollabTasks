@@ -28,10 +28,10 @@ class AllBoardPage extends StatelessWidget {
           children: [
             BoardCard(
                 boardName: "boardName",
-                imageURLlist: [demoUserImage1, demoUserImage1]),
+                imageURLlist: [demoUserImage1, demoUserImage1], emailURLlist: ["a@a.com","a@a.com"]),
             BoardCard(
                 boardName: "board_Name",
-                imageURLlist: [demoUserImage1, demoUserImage1])
+                imageURLlist: [demoUserImage1, demoUserImage1],emailURLlist: ["a@a.com","a@a.com"])
           ],
         ),
         ) );
