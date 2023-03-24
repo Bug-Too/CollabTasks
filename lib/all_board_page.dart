@@ -23,7 +23,8 @@ class AllBoardPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('All Board'),
         ),
-        body: Column(
+        body: SingleChildScrollView(
+          child:  Column(
           children: [
             BoardCard(
                 boardName: "boardName",
@@ -32,6 +33,7 @@ class AllBoardPage extends StatelessWidget {
                 boardName: "board_Name",
                 imageURLlist: [demoUserImage1, demoUserImage1])
           ],
-        ));
+        ),
+        ) );
   }
 }
