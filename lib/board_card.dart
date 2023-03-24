@@ -13,6 +13,7 @@ class BoardCard extends StatefulWidget {
 }
 
 class _BoardCardState extends State<BoardCard> {
+  bool isEdit = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,10 +22,10 @@ class _BoardCardState extends State<BoardCard> {
           borderRadius: BorderRadius.circular(10),
           child: Container(
               color: Colors.white,
-              height: 200,
+              height: isEdit ? 200 : 50,
               alignment: Alignment.topLeft,
               width: double.infinity,
-              child: Column(
+              child:  Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,22 +36,33 @@ class _BoardCardState extends State<BoardCard> {
                       ),
                       Row(
                         children: [
-                          Container(
-                            width: 50,
-                            height: 50,
-                            color: Colors.red,
-                            child: const Center(
-                              child: Icon(Icons.delete, color: Colors.white),
+                          InkWell(
+                            onTap: () => setState(() {
+                              isEdit = !isEdit;
+                            }),
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              color: Colors.blue,
+                              child: const Center(
+                                child: Icon(Icons.edit, color: Colors.white),
+                              ),
                             ),
                           ),
-                          Container(
-                            width: 50,
-                            height: 50,
-                            color: Colors.blue,
-                            child: const Center(
-                              child: Icon(Icons.edit, color: Colors.white),
+                          InkWell(
+                            onTap: () => setState(() {
+                              isEdit = !isEdit;
+                            }),
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              color: Colors.red,
+                              child: const Center(
+                                child: Icon(Icons.delete, color: Colors.white),
+                              ),
                             ),
                           ),
+                          
                         ],
                       )
                     ],
