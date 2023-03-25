@@ -10,10 +10,18 @@ import 'dart:convert' show json;
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io' show Platform;
+import 'dart:io';
+import 'package:flutter/foundation.dart';
+
+bool get isIOS => !kIsWeb && Platform.isIOS;
+bool get isAndroid => !kIsWeb && Platform.isAndroid;
+bool get isWeb => kIsWeb;
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   // Optional clientId
-  // clientId: '620692055821-erkbvlrnduc1fm25asd8euh4nm6nbk98.apps.googleusercontent.com',
+  // put your client id here
+  clientId: isAndroid ? '' : '',
   scopes: <String>[
     'email',
     'https://www.googleapis.com/auth/contacts.readonly',
