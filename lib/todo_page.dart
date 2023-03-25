@@ -3,12 +3,11 @@ import 'package:collabtask/add_new_task.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'edit_general_task.dart';
+import 'edit_scheduled_task.dart';
 import 'style.dart';
 import "package:collabtask/schedule_task.dart";
 import 'all_board_page.dart';
 import 'login_page.dart';
-
-
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
@@ -113,15 +112,14 @@ class _TodoPageState extends State<TodoPage> {
   void initState() {
     super.initState();
     List task_names = ['My Task a', 'My Task b', 'My Task c'];
-    void _onLongPressTask(String task_name) async {
-      TimeOfDay selectedStartTime = TimeOfDay.now();
-      TimeOfDay selectedEndTime = TimeOfDay.now();
 
+    void _onLongPressGeneralTask(String taskName) async {
       showDialog(
           context: context,
           builder: (BuildContext context) {
             return EditGeneralTask(
-              taskName: task_name,
+              taskName: taskName,
+              currentDate: date,
             );
           });
     }
@@ -131,7 +129,7 @@ class _TodoPageState extends State<TodoPage> {
         (index) => TaskCheckBox(
               key: Key(index.toString()),
               callback: _onChangedTask,
-              onLongPress: _onLongPressTask,
+              onLongPress: _onLongPressGeneralTask,
               isDone: false,
               taskName: task_names[index],
             ));
@@ -285,11 +283,10 @@ class _TodoPageState extends State<TodoPage> {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AddNewTask();
+          return AddNewTask(currentDate: date,);
         },
       );
     }
-
 
     Widget generalTaskList() {
       return (Container(
@@ -299,6 +296,17 @@ class _TodoPageState extends State<TodoPage> {
           children: taskList,
         ),
       ));
+    }
+        void _onLongPressScheduledTask(String taskName, DateTime startTime, DateTime endTime) async {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return EditScheduledTask(
+              taskName: taskName,
+              selectedStartTime: startTime,
+              selectedEndTime: endTime,
+            );
+          });
     }
 
     Widget taskBox() {
@@ -334,7 +342,10 @@ class _TodoPageState extends State<TodoPage> {
                       isDone: false,
                       taskName: "taskName ",
                       imageURLlist: [demoUserImage1, demoUserImage1],
-                      timeInterval: [DateTime.now(), DateTime.now()])
+                      timeInterval: [DateTime.now(), DateTime.now()],
+                      callback: _onLongPressScheduledTask
+                      
+                      )
                 ],
               )),
         ),
