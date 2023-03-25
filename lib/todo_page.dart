@@ -1,11 +1,14 @@
 import 'package:collabtask/task_check_box.dart';
-import 'package:collabtask/widget_dialog.dart';
+import 'package:collabtask/add_new_task.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'edit_general_task.dart';
 import 'style.dart';
 import "package:collabtask/schedule_task.dart";
 import 'all_board_page.dart';
 import 'login_page.dart';
+
+
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
@@ -117,9 +120,7 @@ class _TodoPageState extends State<TodoPage> {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return WidgetDialog(
-              title: 'Edit Task',
-              imageURLlist: [demoUserImage1],
+            return EditGeneralTask(
               taskName: task_name,
             );
           });
@@ -281,36 +282,14 @@ class _TodoPageState extends State<TodoPage> {
     }
 
     void addNewTask() async {
-      TimeOfDay selectedStartTime = TimeOfDay.now();
-      TimeOfDay selectedEndTime = TimeOfDay.now();
-
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          return WidgetDialog(
-            title: 'Add New Task',
-            imageURLlist: [demoUserImage1],
-            taskName: "",
-          );
+          return AddNewTask();
         },
       );
     }
 
-    void editTask() async {
-      TimeOfDay selectedStartTime = TimeOfDay.now();
-      TimeOfDay selectedEndTime = TimeOfDay.now();
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return WidgetDialog(
-            title: 'Edit Task',
-            imageURLlist: [demoUserImage1],
-            taskName: "",
-          );
-        },
-      );
-    }
 
     Widget generalTaskList() {
       return (Container(

@@ -1,29 +1,22 @@
 import 'package:flutter/material.dart';
 import 'style.dart';
-import 'profiles_box.dart';
 
-class WidgetDialog extends StatefulWidget {
-  final String title;
-  final List<String> imageURLlist;
-  String taskName;
-  bool isAddTime;
-  TimeOfDay selectedStartTime;
-  TimeOfDay selectedEndTime;
+// iconify_flutter
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/mingcute.dart';
+import 'package:iconify_flutter/icons/bi.dart'; 
+ import 'package:iconify_flutter/icons/material_symbols.dart'; 
 
-  WidgetDialog(
-      {super.key,
-      required this.title,
-      this.imageURLlist = const [],
-      this.selectedStartTime = const TimeOfDay(hour: 0, minute: 0),
-      this.selectedEndTime = const TimeOfDay(hour: 0, minute: 0),
-      this.isAddTime = false,
-      required this.taskName});
+class EditGeneralTask extends StatefulWidget {
+  final String taskName;
+
+  EditGeneralTask({super.key, required this.taskName});
 
   @override
-  State<StatefulWidget> createState() => _WidgetDialogState();
+  State<StatefulWidget> createState() => _EditGeneralTaskState();
 }
 
-class _WidgetDialogState extends State<WidgetDialog> {
+class _EditGeneralTaskState extends State<EditGeneralTask> {
   TimeOfDay selectedStartTime = TimeOfDay.now();
   TimeOfDay selectedEndTime = TimeOfDay.now();
   bool isAddTime = false;
@@ -39,7 +32,7 @@ class _WidgetDialogState extends State<WidgetDialog> {
         children: [
           SizedBox(height: 20),
           Text(
-            widget.title,
+            "Edit Task",
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: 10),
@@ -141,7 +134,9 @@ class _WidgetDialogState extends State<WidgetDialog> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: secondaryColor),
-                  child: Text('Cancel'),
+                  child: Row(
+                    children: [ Iconify(Bi.trash3_fill,) , SizedBox(width: 10,) ,Text('Delete')],
+                  ),
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -153,7 +148,9 @@ class _WidgetDialogState extends State<WidgetDialog> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: successColor),
-                  child: Text('Add'),
+                  child: Row(
+                    children: [ Iconify(MaterialSymbols.edit_square_rounded,),SizedBox(width: 10,) , Text('Save')],
+                  ),
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
