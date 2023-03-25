@@ -3,25 +3,29 @@ import 'style.dart';
 
 // iconify_flutter
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/mingcute.dart';
-import 'package:iconify_flutter/icons/bi.dart'; 
- import 'package:iconify_flutter/icons/material_symbols.dart'; 
+import 'package:iconify_flutter/icons/bi.dart';
+import 'package:iconify_flutter/icons/material_symbols.dart';
 
 class EditGeneralTask extends StatefulWidget {
   final String taskName;
+  final DateTime currentDate;
 
-  EditGeneralTask({super.key, required this.taskName});
+  EditGeneralTask(
+      {super.key, required this.taskName, required this.currentDate});
 
   @override
   State<StatefulWidget> createState() => _EditGeneralTaskState();
 }
 
 class _EditGeneralTaskState extends State<EditGeneralTask> {
+  bool isAddTime = false;
   TimeOfDay selectedStartTime = TimeOfDay.now();
   TimeOfDay selectedEndTime = TimeOfDay.now();
-  bool isAddTime = false;
   @override
   Widget build(BuildContext context) {
+    DateTime selectedStartDateTime = widget.currentDate;
+    DateTime selectedEndDateTime = widget.currentDate;
+
     return Dialog(
       backgroundColor: primaryColor,
       shape: RoundedRectangleBorder(
@@ -96,6 +100,12 @@ class _EditGeneralTaskState extends State<EditGeneralTask> {
                               pickedTime != selectedStartTime) {
                             setState(() {
                               selectedStartTime = pickedTime;
+                              selectedStartDateTime = DateTime(
+                                  selectedStartDateTime.year,
+                                  selectedStartDateTime.month,
+                                  selectedStartDateTime.day,
+                                  pickedTime.hour,
+                                  pickedTime.minute);
                             });
                           }
                         },
@@ -117,6 +127,12 @@ class _EditGeneralTaskState extends State<EditGeneralTask> {
                               pickedTime != selectedEndTime) {
                             setState(() {
                               selectedEndTime = pickedTime;
+                              selectedEndDateTime = DateTime(
+                                  selectedEndDateTime.year,
+                                  selectedEndDateTime.month,
+                                  selectedEndDateTime.day,
+                                  pickedTime.hour,
+                                  pickedTime.minute);
                             });
                           }
                         },
@@ -135,7 +151,15 @@ class _EditGeneralTaskState extends State<EditGeneralTask> {
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: secondaryColor),
                   child: Row(
-                    children: [ Iconify(Bi.trash3_fill,) , SizedBox(width: 10,) ,Text('Delete')],
+                    children: [
+                      Iconify(
+                        Bi.trash3_fill,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text('Delete')
+                    ],
                   ),
                 ),
                 onTap: () {
@@ -149,7 +173,15 @@ class _EditGeneralTaskState extends State<EditGeneralTask> {
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: successColor),
                   child: Row(
-                    children: [ Iconify(MaterialSymbols.edit_square_rounded,),SizedBox(width: 10,) , Text('Save')],
+                    children: [
+                      Iconify(
+                        MaterialSymbols.edit_square_rounded,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text('Save')
+                    ],
                   ),
                 ),
                 onTap: () {

@@ -3,11 +3,11 @@ import 'style.dart';
 import 'profiles_box.dart';
 
 class AddNewTask extends StatefulWidget {
-
-  AddNewTask(
-      {
-      super.key,
-      });
+  final DateTime currentDate;
+  AddNewTask({
+    super.key,
+    required this.currentDate,
+  });
 
   @override
   State<StatefulWidget> createState() => _AddNewTaskState();
@@ -19,6 +19,8 @@ class _AddNewTaskState extends State<AddNewTask> {
   bool isAddTime = false;
   @override
   Widget build(BuildContext context) {
+    DateTime selectedStartDateTime = widget.currentDate;
+    DateTime selectedEndDateTime = widget.currentDate;
     return Dialog(
       backgroundColor: primaryColor,
       shape: RoundedRectangleBorder(
@@ -93,6 +95,12 @@ class _AddNewTaskState extends State<AddNewTask> {
                               pickedTime != selectedStartTime) {
                             setState(() {
                               selectedStartTime = pickedTime;
+                              selectedStartDateTime = DateTime(
+                                  selectedStartDateTime.year,
+                                  selectedStartDateTime.month,
+                                  selectedStartDateTime.day,
+                                  pickedTime.hour,
+                                  pickedTime.minute);
                             });
                           }
                         },
@@ -114,6 +122,12 @@ class _AddNewTaskState extends State<AddNewTask> {
                               pickedTime != selectedEndTime) {
                             setState(() {
                               selectedEndTime = pickedTime;
+                              selectedEndDateTime = DateTime(
+                                  selectedEndDateTime.year,
+                                  selectedEndDateTime.month,
+                                  selectedEndDateTime.day,
+                                  pickedTime.hour,
+                                  pickedTime.minute);
                             });
                           }
                         },
