@@ -74,7 +74,7 @@ class _BoardCardState extends State<BoardCard> {
                   children: [
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                      child: Text('Board Name'),
+                      child: Text(widget.boardName),
                     ),
                     Row(
                       children: [
