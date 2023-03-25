@@ -20,14 +20,14 @@ class BoardCard extends StatefulWidget {
 }
 
 class _BoardCardState extends State<BoardCard> {
-  bool isEdit = true;
+  bool isEdit = false;
   // This shows a CupertinoModalPopup which hosts a CupertinoAlertDialog.
   void _showAlertDialog(BuildContext context) {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoAlertDialog(
         title: const Text('Discard Change?'),
-        content: const Text('Proceed with discard change action?'),
+        content: const Text('Proceed with discard change action'),
         actions: <CupertinoDialogAction>[
           CupertinoDialogAction(
             /// This parameter indicates this action is the default,
