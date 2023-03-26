@@ -20,20 +20,30 @@ class AllBoardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('All Board'),
-        ),
-        body: SingleChildScrollView(
-          child:  Column(
+      appBar: AppBar(
+        title: Text('All Board'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
           children: [
             BoardCard(
                 boardName: "boardName",
-                imageURLlist: [demoUserImage1, demoUserImage1], emailURLlist: ["a@a.com","a@a.com"]),
+                imageURLlist: [demoUserImage1, demoUserImage1],
+                emailURLlist: ["a@a.com", "a@a.com"]),
             BoardCard(
                 boardName: "board_Name",
-                imageURLlist: [demoUserImage1, demoUserImage1],emailURLlist: ["a@a.com","a@a.com"])
+                imageURLlist: [demoUserImage1, demoUserImage1],
+                emailURLlist: ["a@a.com", "a@a.com"])
           ],
         ),
-        ) );
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }
